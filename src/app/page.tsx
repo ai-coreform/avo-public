@@ -1626,24 +1626,24 @@ export default function LandingPage() {
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-12">
               {[
                 {
-                  name: 'Marco Ricci',
+                  name: 'Salvatore Cataldo',
                   role: 'Ristoratore',
                   stars: 5,
-                  avatar: 'https://avatars.githubusercontent.com/u/47919550?v=4',
+                  avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
                   content: "Da quando usiamo Avo, i clienti stranieri ordinano senza problemi. Le traduzioni automatiche sono impeccabili.",
                 },
                 {
-                  name: 'Giulia Ferretti',
+                  name: 'Antonella Tarantino',
                   role: 'Chef',
                   stars: 5,
-                  avatar: 'https://avatars.githubusercontent.com/u/68236786?v=4',
+                  avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
                   content: "Aggiornare il menu è diventato semplicissimo. Cambio i piatti del giorno in pochi secondi, anche dal telefono.",
                 },
                 {
-                  name: 'Luca Bianchi',
+                  name: 'Davide Ferrante',
                   role: 'Ristoratore',
                   stars: 5,
-                  avatar: 'https://avatars.githubusercontent.com/u/99137927?v=4',
+                  avatar: 'https://randomuser.me/api/portraits/men/74.jpg',
                   content: "L'assistente AI risponde alle domande sugli allergeni al posto nostro. I clienti lo adorano.",
                 },
               ].map((testimonial, index) => (
