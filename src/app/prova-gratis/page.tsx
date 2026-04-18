@@ -117,7 +117,14 @@ export default function ProvaGratisPage() {
       const res = await fetch('/api/trial', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ businessName, fullName, phone, province, source }),
+        body: JSON.stringify({
+          businessName,
+          fullName,
+          phone,
+          province,
+          source,
+          cookieConsent: localStorage.getItem('avo-cookie-consent') === 'granted',
+        }),
       })
 
       if (!res.ok) {
@@ -324,6 +331,13 @@ export default function ProvaGratisPage() {
             ))}
             <FieldError message={fieldErrors.source} />
           </fieldset>
+
+          <p className="text-[13px] text-ink/35 leading-relaxed">
+            Inviando questo modulo, accetti la nostra{' '}
+            <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-ink/50">
+              Privacy Policy
+            </a>.
+          </p>
 
           {status === 'error' && (
             <p className="text-[14px] text-destructive">{errorMsg}</p>

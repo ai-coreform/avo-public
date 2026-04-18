@@ -1,22 +1,32 @@
 import type { MetadataRoute } from 'next'
-import { getSiteUrl } from '@/lib/config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = getSiteUrl()
   const now = new Date()
 
   return [
     {
-      url: siteUrl,
+      url: 'https://avomenu.com',
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${siteUrl}/prova-gratis`,
+      url: 'https://avomenu.com/prova-gratis',
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: 'https://avomenu.com/privacy',
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: 'https://avomenu.com/cookie-policy',
+      lastModified: now,
+      changeFrequency: 'yearly',
+      priority: 0.3,
     },
   ]
 }

@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState, useCallback, type ReactNode } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { getSiteUrl, getSocialImageUrl } from '@/lib/config'
+const SITE_URL = 'https://avomenu.com'
 import { cn } from '@/lib/utils'
 import {
   ArrowRight,
@@ -46,8 +46,8 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { StaticMenuDemo } from '@/components/landing/static-menu-demo'
 
-const siteUrl = getSiteUrl()
-const socialImageUrl = getSocialImageUrl()
+const siteUrl = SITE_URL
+const socialImageUrl = `${SITE_URL}/images/header-image.png`
 
 const faqItems = [
   {
@@ -1930,7 +1930,7 @@ export default function LandingPage() {
       <footer className="bg-primary pt-16 pb-8">
         <div className="mx-auto max-w-5xl px-6">
           {/* Top row */}
-          <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+          <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
             {/* Brand */}
             <div>
               <img src="/images/avo-logo-dark.svg" alt="Avo" className="h-7 w-auto" />
@@ -1974,18 +1974,34 @@ export default function LandingPage() {
                 </li>
               </ul>
             </div>
+
+            {/* Legale */}
+            <div>
+              <h4 className="font-display text-sm font-semibold text-primary-foreground/70">Legale</h4>
+              <ul className="mt-4 space-y-2.5">
+                <li>
+                  <a href="/privacy" className="text-sm text-primary-foreground/40 transition-colors hover:text-primary-foreground/70">
+                    Privacy Policy
+                  </a>
+                </li>
+                <li>
+                  <a href="/cookie-policy" className="text-sm text-primary-foreground/40 transition-colors hover:text-primary-foreground/70">
+                    Cookie Policy
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
 
           {/* Bottom row */}
           <div className="mt-12 border-t border-primary-foreground/8 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-primary-foreground/30">
-              &copy; {new Date().getFullYear()} Avo. Tutti i diritti riservati.
-            </p>
-            <div className="flex items-center gap-1">
-              <span className="text-xs text-primary-foreground/30 mr-2">Made with</span>
-              <span className="text-primary-foreground/50">🥑</span>
-              <span className="text-xs text-primary-foreground/30 ml-2">in Italia</span>
+            <div className="text-xs text-primary-foreground/30 text-center md:text-left">
+              <p>&copy; {new Date().getFullYear()} Coreform Limited. Tutti i diritti riservati.</p>
+              <p className="mt-1">Company No. 16633802 &middot; Registered in England and Wales</p>
             </div>
+            <a href="https://coreform.ai/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-primary-foreground/30 hover:text-primary-foreground/50 transition-colors">
+              Un prodotto <img src="/images/coreform-logo.png" alt="Coreform" className="h-3.5 w-auto inline-block" />
+            </a>
           </div>
         </div>
       </footer>
