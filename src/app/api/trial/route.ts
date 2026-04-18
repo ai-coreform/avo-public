@@ -5,6 +5,8 @@ import { parsePhoneNumberFromString } from 'libphonenumber-js'
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 const databaseId = process.env.NOTION_CRM_DATABASE_ID!
 const slackWebhookUrl = process.env.SLACK_WEBHOOK_URL
+const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
+const metaAccessToken = process.env.META_CONVERSIONS_API_TOKEN
 const NOTION_SOURCE_MAP: Record<string, string> = {
   'Pubblicità online (es. Instagram Ads, Google Ads, etc.)': 'Pubblicità online',
   'Social Media (Facebook, Instagram, etc.)': 'Social Media',
@@ -81,6 +83,31 @@ export async function POST(request: NextRequest) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(slackMessage),
       }).catch((err) => console.error('Slack webhook error:', err))
+    }
+
+    if (metaPixelId && metaAccessToken && body.cookieConsent) {
+      const eventData = {
+        data: [
+          {
+            event_name: 'Lead',
+            event_time: Math.floor(Date.now() / 1000),
+            action_source: 'website',
+            user_data: {
+              ph: [phone],
+              fn: [fullName.toLowerCase()],
+            },
+          },
+        ],
+      }
+
+      fetch(
+        `https://graph.facebook.com/v21.0/${metaPixelId}/events?access_token=${metaAccessToken}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(eventData),
+        },
+      ).catch((err) => console.error('Meta Conversions API error:', err))
     }
 
     return NextResponse.json({ success: true })

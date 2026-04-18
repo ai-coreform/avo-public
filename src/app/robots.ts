@@ -1,5 +1,4 @@
 import type { MetadataRoute } from 'next'
-import { getSiteUrl } from '@/lib/config'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -10,7 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api'],
       },
     ],
-    sitemap: `${getSiteUrl()}/sitemap.xml`,
-    host: getSiteUrl(),
+    sitemap: 'https://avomenu.com/sitemap.xml',
   }
 }

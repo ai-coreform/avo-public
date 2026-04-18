@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import { Bricolage_Grotesque, DM_Sans, Figtree } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
-import { getSiteUrlObject, getSocialImagePath } from '@/lib/config';
-
-const META_PIXEL_ID = '1088877953440738';
+import { CookieBanner } from '@/components/cookie-banner';
+import { MetaPixel } from '@/components/meta-pixel';
 
 const figtree = Figtree({subsets:['latin'],variable:'--font-sans'});
 
@@ -22,7 +20,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: getSiteUrlObject(),
+  metadataBase: new URL('https://avomenu.com'),
   title: {
     template: 'Avo - %s',
     default: 'Avo | Menu digitale per ristoranti',
@@ -42,7 +40,7 @@ export const metadata: Metadata = {
       'Menu digitale con QR code, traduzioni automatiche e back office semplice per ristoranti.',
     images: [
       {
-        url: getSocialImagePath(),
+        url: '/images/header-image.png',
         width: 2000,
         height: 1125,
         alt: 'Anteprima del menu digitale Avo',
@@ -54,7 +52,7 @@ export const metadata: Metadata = {
     title: 'Avo | Menu digitale per ristoranti',
     description:
       'Menu digitale con QR code, traduzioni automatiche e back office semplice per ristoranti.',
-    images: [getSocialImagePath()],
+    images: ['/images/header-image.png'],
   },
 };
 
@@ -65,32 +63,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className={cn("font-sans", figtree.variable)}>
-      <head>
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-          />
-        </noscript>
-      </head>
       <body className={`${bricolage.variable} ${dmSans.variable} antialiased`}>
         {children}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src=v;s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${META_PIXEL_ID}');
-            fbq('track', 'PageView');
-          `}
-        </Script>
+        <MetaPixel />
+        <CookieBanner />
       </body>
     </html>
   );
